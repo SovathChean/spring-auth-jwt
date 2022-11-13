@@ -61,6 +61,9 @@ public class AuthorizationFilter extends OncePerRequestFilter {
                  }
                  assert decodedJWT != null;
                  String username = decodedJWT.getSubject();
+                 String uniqueKey = decodedJWT.getClaim("tokenKey").asString();
+                 if(!authenticationService.hasUniqueKey(uniqueKey))
+                     RaiseException.exception(response, SysHttpResultCode.ERROR_401.getCode(), SysHttpResultCode.ERROR_401.getDescription());
                  UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new
                          UsernamePasswordAuthenticationToken(username, null, new ArrayList<>());
                  SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);

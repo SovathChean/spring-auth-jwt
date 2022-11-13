@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository;
 public interface OAuthTokenDAO extends JpaRepository<OAuthTokenEntity, Long> {
 
     OAuthTokenEntity findByUniqueKey(String uniqueKey);
+    Boolean existsByUniqueKey(String uniqueKey);
 }

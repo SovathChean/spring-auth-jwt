@@ -60,4 +60,9 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
         this.revokeToken(tokenKey);
     }
+
+    @Override
+    public Boolean hasUniqueKey(String uniqueKey) {
+        return authTokenDAO.existsByUniqueKey(uniqueKey);
+    }
 }

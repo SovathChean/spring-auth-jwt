@@ -46,4 +46,12 @@ public class AuthenticationController {
         return new ResponseBuilderMessage<>().success().addMessage("Logout successfully").build();
     }
 
+    @RequestMapping(value="api/auth", method = RequestMethod.GET)
+    public ResponseMessage<UserEntity> auth()
+    {
+        UserEntity auth = userService.findAuth();
+
+        return new ResponseBuilderMessage<UserEntity>().success().addData(auth).build();
+    }
+
 }

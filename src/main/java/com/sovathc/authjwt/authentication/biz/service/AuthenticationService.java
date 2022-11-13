@@ -7,4 +7,6 @@ public interface AuthenticationService {
     void storeUnqiueKey(String unqiueKey);
     void revokeToken(String uniqueKey) throws Exception;
     void logout(String token) throws Exception;
+    Boolean hasUniqueKey(String uniqueKey);
+
 }
