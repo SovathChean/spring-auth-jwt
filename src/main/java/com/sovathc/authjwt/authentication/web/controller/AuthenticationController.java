@@ -25,17 +25,13 @@ public class AuthenticationController {
     private UserService userService;
 
     @RequestMapping(value = "api/refreshToken", method = RequestMethod.GET)
-    public ResponseMessage<OAuthTokenFormatDTO> refreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public OAuthTokenFormatDTO refreshToken(HttpServletRequest request, HttpServletResponse response) throws Exception {
         UserEntity auth = userService.findAuth();
         String tokenKey = JwtGenerateUniqueKey.getUniqueKey(auth.getUsername());
         DecodedJWT bearerToken = new JwtVerified().getBearerToken(request, response);
         OAuthTokenFormatDTO oAuthTokenFormatDTO = authenticationService.refreshToken(bearerToken.getToken(), tokenKey);
 
-        return new ResponseBuilderMessage<OAuthTokenFormatDTO>()
-                    .success()
-                    .addMessage("Refresh token successfully")
-                    .addData(oAuthTokenFormatDTO)
-                    .build();
+        return oAuthTokenFormatDTO;
     }
 
     @RequestMapping(value = "api/logout", method = RequestMethod.GET)

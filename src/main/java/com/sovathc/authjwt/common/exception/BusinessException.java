@@ -3,7 +3,7 @@ package com.sovathc.authjwt.common.exception;
 import lombok.Getter;
 
 @Getter
-public class BusinessException extends Exception{
+public class BusinessException extends RuntimeException{
     private String code;
 
     public BusinessException(String code, String message)

@@ -7,6 +7,8 @@ import lombok.Data;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 @Data
 public class RaiseException {
     public static void exception(HttpServletResponse response, String httpCode, String message) throws IOException {
@@ -15,6 +17,7 @@ public class RaiseException {
         exception.setResult(false);
         exception.setResultCode(httpCode);
         exception.setResultMessage(message);
+        response.setContentType(APPLICATION_JSON_VALUE);
 
         new ObjectMapper().writeValue(response.getOutputStream(), exception);
     }
